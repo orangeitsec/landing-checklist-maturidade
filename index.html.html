@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist de Maturidade em Segurança — OrangeIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<style>
+  /* ─── OVERRIDE BREVO — integração com design OrangeIT ─── */
+  .sib-form { background: transparent !important; padding: 0 !important; text-align: left !important; }
+  #sib-form-container { background: transparent !important; }
+  #sib-container {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    text-align: left !important;
+    padding: 0 !important;
+  }
+  #sib-container input.input,
+  #sib-container select.input {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 4px !important;
+    color: #E8E8E8 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.95rem !important;
+    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s, background 0.2s !important;
+  }
+  #sib-container input.input:focus,
+  #sib-container select.input:focus {
+    border-color: #FF4F00 !important;
+    background: rgba(255,79,0,0.05) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  #sib-container input:-ms-input-placeholder { color: #888 !important; font-family: 'DM Sans', sans-serif !important; }
+  #sib-container input::-ms-input-placeholder { color: #888 !important; font-family: 'DM Sans', sans-serif !important; }
+  #sib-container input::-webkit-input-placeholder { color: #888 !important; font-family: 'DM Sans', sans-serif !important; }
+  #sib-container input::-moz-placeholder { color: #888 !important; font-family: 'DM Sans', sans-serif !important; opacity: 1 !important; }
+  #sib-container input::placeholder { color: #888 !important; font-family: 'DM Sans', sans-serif !important; }
+  #sib-container select.input {
+    color: #888 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1rem center !important;
+    padding-right: 2.5rem !important;
+  }
+  #sib-container select.input option { background: #1a1a1a !important; color: #E8E8E8 !important; }
+  .entry__label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+    color: #888888 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .sib-form-block p { display: none !important; }
+  .form__entry { margin-bottom: 0 !important; }
+  .sib-form-block__button {
+    background: #FF4F00 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    padding: 0.9rem 1.5rem !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    text-align: center !important;
+    transition: background 0.2s, transform 0.15s !important;
+    margin-top: 0.5rem !important;
+  }
+  .sib-form-block__button:hover { background: #CC3E00 !important; transform: translateY(-1px) !important; }
+  .sib-form-message-panel { display: none !important; border-radius: 4px !important; max-width: 100% !important; margin-bottom: 1rem !important; }
+  #success-message.sib-form-message-panel--active { display: block !important; background-color: rgba(19,206,102,0.1) !important; border-color: #13ce66 !important; color: #13ce66 !important; }
+  #error-message.sib-form-message-panel--active { display: block !important; background-color: rgba(255,73,73,0.1) !important; border-color: #ff4949 !important; color: #ff4949 !important; }
+  .sib-sms-input-wrapper { display: flex !important; gap: 8px !important; }
+  .sib-sms-input-wrapper select.input { flex: 0 0 110px !important; width: 110px !important; }
+  .sib-sms-tooltip { display: none !important; }
+  .g-recaptcha { margin-top: 0.5rem !important; transform: scale(0.9) !important; transform-origin: left !important; }
+  .entry__error { font-size: 0.75rem !important; font-family: 'DM Sans', sans-serif !important; margin-top: 0.25rem !important; display: block !important; }
+  .entry__specification { display: none !important; }
+  .sib-hide-loader-icon { display: none !important; }
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF4F00;
+    --orange-dim: #CC3E00;
+    --orange-glow: rgba(255,79,0,0.18);
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #161616;
+    --border: rgba(255,255,255,0.08);
+    --text: #E8E8E8;
+    --muted: #888888;
+    --white: #FFFFFF;
+    --serif: 'Roboto', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 64px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--orange); }
+
+  nav a.cta-nav {
+    background: var(--orange);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  nav a.cta-nav:hover { background: var(--orange-dim); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px clamp(1.5rem, 8vw, 8rem) 80px;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,79,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,79,0,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,79,0,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,79,0,0.12);
+    border: 1px solid rgba(255,79,0,0.3);
+    color: var(--orange);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--orange);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .divider-v {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    align-self: center;
+  }
+
+  /* ─── FORM CARD ─── */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 2rem; right: 2rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  }
+
+  .form-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.5;
+  }
+
+  .form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .field input,
+  .field select {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field input::placeholder { color: #444; }
+
+  .field input:focus,
+  .field select:focus {
+    border-color: var(--orange);
+    background: rgba(255,79,0,0.05);
+  }
+
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    color: #888;
+  }
+
+  .field select option { background: #1a1a1a; color: var(--white); }
+  .field select option:not([value=""]) { color: var(--white); }
+
+  .btn-primary {
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    padding: 0.9rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    width: 100%;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary:hover { background: var(--orange-dim); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .form-privacy {
+    font-size: 0.72rem;
+    color: #555;
+    text-align: center;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--white);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  h2 em { font-style: normal; color: var(--orange); }
+
+  /* ─── WHAT YOU GET ─── */
+  .what {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .what-header {
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+
+  .what-header p {
+    color: var(--muted);
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .item-card:hover { border-color: rgba(255,79,0,0.3); }
+
+  .item-number {
+    font-family: var(--serif);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .item-card h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .item-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── FOR WHO ─── */
+  .forwho {
+    padding: 100px 0;
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .forwho-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .forwho-desc {
+    color: var(--muted);
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .forwho-desc strong { color: var(--text); font-weight: 500; }
+
+  .profiles {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .profile-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--card);
+  }
+
+  .profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,79,0,0.1);
+    border: 1px solid rgba(255,79,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .profile-info strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+
+  .profile-info span {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ─── CHECKLIST PREVIEW ─── */
+  .checklist-section {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .checklist-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .checklist-header p {
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .check-domain {
+    background: var(--card);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .check-domain::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .check-domain:hover::after { transform: scaleX(1); }
+
+  .domain-number {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(255,79,0,0.15);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .domain-name {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .domain-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .domain-items li {
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  .domain-items li::before {
+    content: '—';
+    color: rgba(255,79,0,0.5);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  /* ─── SOCIAL PROOF ─── */
+  .proof {
+    padding: 100px 0;
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .proof-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .proof-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+  }
+
+  .proof-quote {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .proof-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .proof-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .proof-name {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--white);
+  }
+
+  .proof-role {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ─── CTA FINAL ─── */
+  .cta-section {
+    padding: 120px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(255,79,0,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .cta-anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--orange);
+    color: var(--white);
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-anchor:hover { background: var(--orange-dim); transform: translateY(-2px); }
+
+  .cta-anchor svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s;
+  }
+
+  .cta-anchor:hover svg { transform: translateX(3px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  /* ─── MODAL SUCCESS ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    max-width: 440px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255,79,0,0.1);
+    border: 1px solid rgba(255,79,0,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .modal-box h3 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .modal-box p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .modal-close {
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover { background: var(--orange-dim); }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .forwho-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .checklist-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .proof-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .checklist-grid { grid-template-columns: 1fr; }
+    .items-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .form-card { padding: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Orange<span>IT</span></a>
+  <a href="#cadastro" class="cta-nav">Baixar Grátis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="badge fade-in">Ebook Gratuito · Segurança Ofensiva</div>
+      <h1 class="fade-in">
+        Checklist de<br><em>Maturidade</em><br>em Segurança
+      </h1>
+      <p class="hero-desc fade-in">
+        Descubra em que nível de maturidade sua organização realmente está — e o que fazer para avançar. Um guia prático desenvolvido por especialistas em pentest e Red Team.
+      </p>
+      <div class="hero-stats fade-in">
+        <div class="stat-item">
+          <span class="stat-num">9</span>
+          <span class="stat-label">Domínios avaliados</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="stat-item">
+          <span class="stat-num">60+</span>
+          <span class="stat-label">Controles técnicos</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="stat-item">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Níveis de maturidade</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM BREVO -->
+    <div class="form-card fade-in" id="cadastro">
+      <p class="form-title">Receba o checklist agora</p>
+      <p class="form-subtitle">Preencha os dados abaixo e receba o material no seu e-mail imediatamente.</p>
+
+      <div class="sib-form" style="text-align:center; background-color:transparent;">
+        <div id="sib-form-container" class="sib-form-container">
+          <div id="error-message" class="sib-form-message-panel" style="display:none; font-family:'DM Sans',sans-serif; font-size:14px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:4px; max-width:100%;">
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon" style="width:18px;height:18px;"><path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z"/></svg>
+              <span class="sib-form-message-panel__inner-text">Sua solicitação não pôde ser validada.</span>
+            </div>
+          </div>
+          <div></div>
+          <div id="success-message" class="sib-form-message-panel" style="display:none; font-family:'DM Sans',sans-serif; font-size:14px; text-align:left; color:#085229; background-color:#e7faf0; border-color:#13ce66; border-radius:4px; max-width:100%;">
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon" style="width:18px;height:18px;"><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/></svg>
+              <span class="sib-form-message-panel__inner-text">Parabéns! Solicitação enviada com sucesso.</span>
+            </div>
+          </div>
+          <div></div>
+          <div id="sib-container" class="sib-container--large sib-container--vertical" style="text-align:center; direction:ltr;">
+            <form id="sib-form" method="POST" action="https://18f4aa97.sibforms.com/serve/MUIFABdcio2v-b5eJ8UFOjMBU7PELR6dF4-3y7PIT48djvZs9Vs3TMI4ZoOB9zO8ZfABe8T6shz2Myq2XGyjry5WaGMr4PHd-TGS7kgYjxaDOoBokItxNYiJj1xK3scwqi-YBgrMClmfHy71u75ESSp8MphT8mvYzI-a6eUxcMW6_9sntEXtfVYRkIWTK6C3T6aRwq39AxTgzPbIKg==" data-type="subscription">
+
+              <div style="padding:16px 0;">
+                <div class="sib-input sib-form-block">
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="NOME" data-required="*">Insira seu NOME</label>
+                      <div class="entry__field">
+                        <input class="input" maxlength="200" type="text" id="NOME" name="NOME" autocomplete="off" placeholder="Seu nome" data-required="true" required />
+                      </div>
+                    </div>
+                    <label class="entry__error entry__error--primary" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#ff4949;"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:16px 0;">
+                <div class="sib-input sib-form-block">
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="EMAIL" data-required="*">E-MAIL</label>
+                      <div class="entry__field">
+                        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="Seu e-mail" data-required="true" required />
+                      </div>
+                    </div>
+                    <label class="entry__error entry__error--primary" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#ff4949;"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:16px 0;">
+                <div class="sib-input sib-form-block">
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="COMPANY_NAME" data-required="*">EMPRESA</label>
+                      <div class="entry__field">
+                        <input class="input" maxlength="200" type="text" id="COMPANY_NAME" name="COMPANY_NAME" autocomplete="off" placeholder="Nome da sua empresa" data-required="true" required />
+                      </div>
+                    </div>
+                    <label class="entry__error entry__error--primary" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#ff4949;"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:16px 0;">
+                <div class="sib-select sib-form-block" data-required="true">
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="CARGO" data-required="*">CARGO</label>
+                      <div class="entry__field">
+                        <select class="input" id="CARGO" name="CARGO" data-required="true">
+                          <option value="" disabled selected hidden>Escolha um valor</option>
+                          <option value="1">CISO / CSO</option>
+                          <option value="2">Gerente de Segurança</option>
+                          <option value="3">Analista de Segurança</option>
+                          <option value="4">CTO / Diretor de TI</option>
+                          <option value="5">DPO / Compliance</option>
+                          <option value="6">CEO / Diretor Geral</option>
+                          <option value="7">Outro</option>
+                        </select>
+                      </div>
+                    </div>
+                    <label class="entry__error entry__error--primary" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#ff4949;"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:16px 0;">
+                <div class="sib-sms-field sib-form-block">
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="LANDLINE_NUMBER" data-required="*">TELEFONE</label>
+                      <div class="sib-sms-input-wrapper" style="direction:ltr;">
+                        <div class="sib-sms-input" data-placeholder="" data-required="true" data-country-code="BR" data-value="" data-attributename="LANDLINE_NUMBER">
+                          <div class="entry__field">
+                            <select class="input" name="LANDLINE_NUMBER__COUNTRY_CODE" data-required="true" style="flex:0 0 110px;width:110px;">
+                              <option value="+55" selected>+55 BR</option>
+                              <option value="+54">+54 AR</option>
+                              <option value="+56">+56 CL</option>
+                              <option value="+57">+57 CO</option>
+                              <option value="+52">+52 MX</option>
+                              <option value="+51">+51 PE</option>
+                              <option value="+598">+598 UY</option>
+                              <option value="+58">+58 VE</option>
+                              <option value="+1">+1 US</option>
+                              <option value="+44">+44 GB</option>
+                            </select>
+                          </div>
+                          <div class="entry__field" style="width:100%;">
+                            <input type="tel" class="input" id="LANDLINE_NUMBER" name="LANDLINE_NUMBER" autocomplete="off" placeholder="LANDLINE_NUMBER" data-required="true" required />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <label class="entry__error entry__error--primary" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#ff4949;"></label>
+                    <label class="entry__error entry__error--secondary" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#ff4949;"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:16px 0;">
+                <div class="sib-form-block" style="text-align:left;">
+                  <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+                    <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="width:16px;height:16px;margin-right:8px;"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/></svg>
+                    Quero meu Checklist Gratuito
+                  </button>
+                </div>
+              </div>
+
+              <input type="text" name="email_address_check" value="" class="input--hidden">
+              <input type="hidden" name="locale" value="pt">
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <p class="form-privacy">🔒 Sem spam. Seus dados estão seguros e não serão compartilhados com terceiros.</p>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VOCÊ VAI ENCONTRAR -->
+<section class="what">
+  <div class="container">
+    <div class="what-header fade-in">
+      <p class="section-label">O que está no material</p>
+      <h2>Tudo que você precisa para <em>avaliar e evoluir</em> sua postura de segurança</h2>
+      <p>O checklist foi estruturado para ser aplicado por times de segurança, TI e gestores — sem jargão desnecessário, focado em ações concretas.</p>
+    </div>
+    <div class="items-grid">
+      <div class="item-card fade-in">
+        <p class="item-number">01 —</p>
+        <h3>Diagnóstico por domínio</h3>
+        <p>Avalie cada área de segurança separadamente: identidade, endpoints, rede, dados, cloud, resposta a incidentes e mais.</p>
+      </div>
+      <div class="item-card fade-in">
+        <p class="item-number">02 —</p>
+        <h3>Escala de maturidade de 1 a 5</h3>
+        <p>Classifique o estado atual de cada controle e identifique rapidamente onde estão as maiores lacunas e riscos.</p>
+      </div>
+      <div class="item-card fade-in">
+        <p class="item-number">03 —</p>
+        <h3>Roadmap de evolução</h3>
+        <p>Para cada nível de maturidade, o checklist aponta as próximas ações prioritárias para avançar com eficiência.</p>
+      </div>
+      <div class="item-card fade-in">
+        <p class="item-number">04 —</p>
+        <h3>Alinhamento com frameworks</h3>
+        <p>Os controles estão mapeados para NIST CSF, ISO 27001 e LGPD — facilitando auditorias e certificações.</p>
+      </div>
+      <div class="item-card fade-in">
+        <p class="item-number">05 —</p>
+        <h3>Linguagem executiva</h3>
+        <p>Resultados traduzidos para o vocabulário de negócios: risco, impacto e prioridade — para apresentar à diretoria.</p>
+      </div>
+      <div class="item-card fade-in">
+        <p class="item-number">06 —</p>
+        <h3>Critérios de pentest</h3>
+        <p>Identifique quando e onde um pentest ou exercício de Red Team seria o próximo passo para validar seus controles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="forwho">
+  <div class="container">
+    <div class="forwho-inner">
+      <div class="fade-in">
+        <p class="section-label">Para quem é este material</p>
+        <h2>Para quem precisa de <em>clareza</em> sobre onde está e para onde ir</h2>
+        <p class="forwho-desc">
+          Se você lidera segurança, TI ou compliance em uma organização de qualquer porte, este checklist vai dar <strong>visibilidade imediata</strong> sobre o nível real de proteção da sua empresa — e o que fazer a seguir.
+        </p>
+        <p class="forwho-desc" style="margin-top: 1rem;">
+          Desenvolvido com base em centenas de projetos de <strong>pentest e Red Team</strong> realizados pela equipe OrangeIT, com foco no mercado brasileiro.
+        </p>
+      </div>
+      <div class="profiles fade-in">
+        <div class="profile-item">
+          <div class="profile-icon">🛡️</div>
+          <div class="profile-info">
+            <strong>CISO e Líderes de Segurança</strong>
+            <span>Estruture argumentos para budget e prioridades com base em dados de maturidade.</span>
+          </div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-icon">💻</div>
+          <div class="profile-info">
+            <strong>Analistas e Times de Segurança</strong>
+            <span>Tenha um roteiro claro do que implementar e melhorar no ambiente.</span>
+          </div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-icon">📋</div>
+          <div class="profile-info">
+            <strong>DPO e Times de Compliance</strong>
+            <span>Mapeie gaps de conformidade com LGPD, ISO 27001 e NIST CSF.</span>
+          </div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-icon">📈</div>
+          <div class="profile-info">
+            <strong>Diretores de TI e CTOs</strong>
+            <span>Tome decisões de investimento em segurança com base em diagnóstico objetivo.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÉVIA DO CHECKLIST -->
+<section class="checklist-section">
+  <div class="container">
+    <div class="checklist-header fade-in">
+      <p class="section-label">Prévia do conteúdo</p>
+      <h2>9 domínios que cobrem a <em>superfície completa</em> de ataque</h2>
+      <p>Cada domínio contém controles técnicos e organizacionais com critérios objetivos de avaliação.</p>
+    </div>
+    <div class="checklist-grid fade-in">
+      <div class="check-domain">
+        <div class="domain-number">01</div>
+        <div class="domain-name">Gestão de Identidade e Acesso</div>
+        <ul class="domain-items">
+          <li>MFA em sistemas críticos</li>
+          <li>Controle de contas privilegiadas</li>
+          <li>Política de senhas e PAM</li>
+          <li>Revisão periódica de acessos</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">02</div>
+        <div class="domain-name">Segurança de Endpoints</div>
+        <ul class="domain-items">
+          <li>EDR/XDR implantado</li>
+          <li>Patch management ativo</li>
+          <li>Criptografia de disco</li>
+          <li>Controle de dispositivos removíveis</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">03</div>
+        <div class="domain-name">Segurança de Rede</div>
+        <ul class="domain-items">
+          <li>Segmentação e micro-segmentação</li>
+          <li>Monitoramento de tráfego (NDR)</li>
+          <li>VPN e acesso remoto seguro</li>
+          <li>Firewall next-gen configurado</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">04</div>
+        <div class="domain-name">Proteção de Dados</div>
+        <ul class="domain-items">
+          <li>Classificação de dados</li>
+          <li>DLP implementado</li>
+          <li>Backup e recuperação testados</li>
+          <li>Conformidade com LGPD</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">05</div>
+        <div class="domain-name">Segurança em Cloud</div>
+        <ul class="domain-items">
+          <li>CSPM ativo</li>
+          <li>IAM de cloud configurado</li>
+          <li>Visibilidade de workloads</li>
+          <li>Buckets e APIs expostas</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">06</div>
+        <div class="domain-name">Resposta a Incidentes</div>
+        <ul class="domain-items">
+          <li>Playbooks documentados</li>
+          <li>Exercícios tabletop realizados</li>
+          <li>Tempo de detecção medido (MTTD)</li>
+          <li>Comunicação de crise definida</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">07</div>
+        <div class="domain-name">Conscientização e Cultura</div>
+        <ul class="domain-items">
+          <li>Treinamentos periódicos</li>
+          <li>Simulação de phishing</li>
+          <li>Política de segurança comunicada</li>
+          <li>Canal de reporte de incidentes</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">08</div>
+        <div class="domain-name">Gestão de Vulnerabilidades</div>
+        <ul class="domain-items">
+          <li>Escaneamento contínuo ativo</li>
+          <li>SLA de remediação definido</li>
+          <li>Pentest e Red Team recentes</li>
+          <li>ASM (superfície de ataque externa)</li>
+        </ul>
+      </div>
+      <div class="check-domain">
+        <div class="domain-number">09</div>
+        <div class="domain-name">Governança e Compliance</div>
+        <ul class="domain-items">
+          <li>Política de segurança atualizada</li>
+          <li>Gestão de riscos formalizada</li>
+          <li>Auditoria de terceiros</li>
+          <li>Board reporting de segurança</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<section class="proof">
+  <div class="container">
+    <div class="proof-inner">
+      <div class="proof-card fade-in">
+        <p class="proof-quote">"Usamos o checklist da OrangeIT antes de contratar o pentest. Identificamos 3 gaps críticos que nem sabíamos que tinham — e isso mudou completamente nosso escopo."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">RC</div>
+          <div>
+            <p class="proof-name">Ricardo C.</p>
+            <p class="proof-role">CISO — Fintech São Paulo</p>
+          </div>
+        </div>
+      </div>
+      <div class="proof-card fade-in">
+        <p class="proof-quote">"Material muito objetivo. Em 2 horas consegui mapear onde estávamos e levar um relatório para o board com clareza sobre os riscos mais urgentes."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">AM</div>
+          <div>
+            <p class="proof-name">Ana M.</p>
+            <p class="proof-role">Diretora de TI — Grupo Varejista</p>
+          </div>
+        </div>
+      </div>
+      <div class="proof-card fade-in">
+        <p class="proof-quote">"Finalmente um checklist em português, contextualizado para o mercado brasileiro e alinhado à LGPD. Recomendo para qualquer equipe de segurança."</p>
+        <div class="proof-author">
+          <div class="proof-avatar">FL</div>
+          <div>
+            <p class="proof-name">Fernando L.</p>
+            <p class="proof-role">DPO — Empresa de Saúde</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="container" style="position: relative; z-index: 1;">
+    <p class="section-label fade-in">Gratuito. Sem compromisso.</p>
+    <h2 class="fade-in">Saiba em que nível está a segurança da sua empresa <em>hoje</em></h2>
+    <p class="fade-in">O diagnóstico que você precisava para tomar decisões de segurança com mais clareza e objetividade.</p>
+    <a href="#cadastro" class="cta-anchor fade-in">
+      Baixar o Checklist Gratuito
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 OrangeIT Cybersecurity. Todos os direitos reservados.</span>
+  <span>
+    <a href="mailto:contato@orangeit.com.br">contato@orangeit.com.br</a>
+    &nbsp;·&nbsp;
+    <a href="#">Política de Privacidade</a>
+  </span>
+</footer>
+
+<!-- MODAL SUCCESS -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box">
+    <div class="modal-icon">✓</div>
+    <h3>Material a caminho!</h3>
+    <p>O Checklist de Maturidade foi enviado para o seu e-mail. Verifique também a caixa de spam caso não encontre.</p>
+    <button class="modal-close" onclick="document.getElementById('successModal').classList.remove('active')">Entendido</button>
+  </div>
+</div>
+
+<script>
+  // ─── INTERSECTION OBSERVER — FADE IN ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ─── SMOOTH SCROLL ───
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ─── BREVO FORM CONFIG ───
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Escolha um código de país';
+  window.LOCALE = 'pt';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "A informação fornecida não é válida. Verifique o formato do campo e tente novamente.";
+  window.REQUIRED_ERROR_MESSAGE = "Este campo não pode ser deixado em branco.";
+  window.GENERIC_INVALID_MESSAGE = "A informação fornecida não é válida. Verifique o formato do campo e tente novamente.";
+  window.INVALID_NUMBER = "A informação fornecida não é válida. Verifique o formato do campo e tente novamente.";
+  window.INVALID_DATE = "Insira uma data válida";
+  window.REQUIRED_MULTISELECT_MESSAGE = 'Selecione pelo menos 1 opção';
+  window.translation = {
+    common: {
+      selectedList: '{quantity} lista selecionada',
+      selectedLists: '{quantity} listas selecionadas',
+      selectedOption: '{quantity} selecionado',
+      selectedOptions: '{quantity} selecionados',
+    }
+  };
+  var AUTOHIDE = Boolean(1);
+</script>
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+</body>
+</html>
